@@ -105,124 +105,192 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Insert all employees from Former_employees into Employee
 
-```sql
--- Paste your SQL code below for Question 1
+Table attributes are EmployeeID, Name, Department, Salary
+
+```
+INSERT INTO Employee(EmployeeID, Name, Department, Salary)
+SELECT EmployeeID, Name, Department, Salary
+FROM Former_employees;
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1188" height="277" alt="dm1" src="https://github.com/user-attachments/assets/00cf41e1-fffd-4b21-a080-6a30d31a817f" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
 
-```sql
--- Paste your SQL code below for Question 2
+```
+CREATE TABLE jobs (
+    job_id INTEGER,
+    job_title TEXT DEFAULT ' ',
+    min_salary INTEGER DEFAULT 8000,
+    max_salary INTEGER DEFAULT NULL
+);
 ```
 
 **Output:**
+<img width="1797" height="242" alt="dm2" src="https://github.com/user-attachments/assets/63042a6d-8eed-4071-826c-12c0fcde2a9d" />
 
-![Output2](output.png)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Write a SQL Query  to add attribute Date_of_joining as Date and rename the attribute job_title as Designation in the table 'Employees'
 
-```sql
--- Paste your SQL code below for Question 3
+```
+ALTER TABLE Employees
+ADD COLUMN Date_of_joining Date;
+ALTER TABLE Employees
+RENAME COLUMN job_title TO
+Designation;
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1270" height="253" alt="dm3" src="https://github.com/user-attachments/assets/4995f2d6-971d-4c3b-9fa0-3ec26d6d14f8" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Insert the below data into the Employee table, allowing the Department and Salary columns to take their default values.
 
-```sql
--- Paste your SQL code below for Question 4
+```
+INSERT INTO Employee(EmployeeID,Name,Position)
+VALUES(4,'Emily White','Analyst')
 ```
 
 **Output:**
+<img width="1127" height="296" alt="dm4" src="https://github.com/user-attachments/assets/9ee77a39-0a20-4c67-ae1d-c5de5900542d" />
 
-![Output4](output.png)
 
 **Question 5**
 ---
--- Paste Question 5 here
 
-```sql
--- Paste your SQL code below for Question 5
+In the Student_details table, insert a student record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+```
+INSERT INTO Student_details(RollNo,Name,Gender,Subject,Marks) VALUES
+(205, 'Olivia Green', 'F', NULL, NULL),
+(207, 'Liam Smith', 'M', 'Mathematics', 85),
+(208, 'Sophia Johnson', 'F', 'Science', NULL);
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1226" height="210" alt="dm5" src="https://github.com/user-attachments/assets/3fb3f3eb-048f-46a3-81a2-ba65ae3473c6" />
 
 **Question 6**
 ---
--- Paste Question 6 here
 
-```sql
--- Paste your SQL code below for Question 6
+Write a SQL Query to add an attribute designation in the employee table with the data type VARCHAR(50).
+```
+ALTER TABLE employee
+ADD COLUMN designation varchar(50);
 ```
 
 **Output:**
-
-![Output6](output.png)
+<img width="1267" height="217" alt="dm6" src="https://github.com/user-attachments/assets/9f4c94b9-3bf4-4bc7-b172-c2f0227cb796" />
 
 **Question 7**
 ---
--- Paste Question 7 here
+Create a new table named item with the following specifications and constraints:
+1. item_id as TEXT and as primary key.
+2. item_desc as TEXT.
+3. rate as INTEGER.
+4. icom_id as TEXT with a length of 4.
+5. icom_id is a foreign key referencing com_id in the company table.
+6. The foreign key should cascade updates and deletes.
+7. item_desc and rate should not accept NULL.
 
-```sql
--- Paste your SQL code below for Question 7
+```
+CREATE TABLE item (
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT,
+    FOREIGN KEY (icom_id) REFERENCES company(com_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
 ```
 
 **Output:**
+<img width="1247" height="242" alt="dm7" src="https://github.com/user-attachments/assets/8d1dbe4e-6839-42b0-809a-9a244637330a" />
 
-![Output7](output.png)
 
 **Question 8**
 ---
--- Paste Question 8 here
+Create a table named Department with the following constraints:
+DepartmentID as INTEGER should be the primary key.
+DepartmentName as TEXT should be unique and not NULL.
+Location as TEXT.
 
-```sql
--- Paste your SQL code below for Question 8
+```
+CREATE TABLE Department(
+  DepartmentID INTEGER PRIMARY KEY,
+  DepartmentName TEXT NOT NULL UNIQUE,
+  Location TEXT
+);
 ```
 
 **Output:**
+<img width="1831" height="188" alt="dm8" src="https://github.com/user-attachments/assets/8a102271-879b-4921-8dd1-267f2a8a9274" />
 
-![Output8](output.png)
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a table named Products with the following columns:
 
-```sql
--- Paste your SQL code below for Question 9
+ProductID as INTEGER
+ProductName as TEXT
+Price as REAL
+Stock as INTEGER
+
+```
+CREATE TABLE Products(
+    ProductID INTEGER,
+    ProductName TEXT,
+    Price REAL,
+    Stock INTEGER
+);
 ```
 
 **Output:**
+<img width="1263" height="212" alt="dm9" src="https://github.com/user-attachments/assets/b2e2b492-6ccf-48ea-8d5a-7f390ca38e0b" />
 
-![Output9](output.png)
 
 **Question 10**
 ---
--- Paste Question 10 here
+Create a table named Employees with the following constraints:
 
-```sql
--- Paste your SQL code below for Question 10
+EmployeeID should be the primary key.
+FirstName and LastName should be NOT NULL.
+Email should be unique.
+Salary should be greater than 0.
+DepartmentID should be a foreign key referencing the Departments table.
+
+```
+CREATE TABLE Employees(
+    EmployeeID INTEGER PRIMARY KEY,
+    FirstName TEXT NOT NULL,
+    LastName TEXT NOT NULL,
+    Email TEXT UNIQUE,
+    Salary INTEGER CHECK (Salary>0),
+    DepartmentID INTEGER,
+    FOREIGN KEY (DepartmentID) REFERENCES DepartmentS(DepartmentID)
+)
 ```
 
 **Output:**
+<img width="1291" height="261" alt="dm10" src="https://github.com/user-attachments/assets/b8bb4c32-f1e3-41aa-8efa-d39111e7db80" />
+## MODULE 1 GRADE
 
-![Output10](output.png)
-
+<img width="1156" height="72" alt="dm11" src="https://github.com/user-attachments/assets/8a640f13-9c98-4c9f-aa59-20b2528a7de0" />
 
 ## RESULT
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
