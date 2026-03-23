@@ -22,33 +22,42 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 - Payments tracked for memberships and sessions.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+### Name: RAGASUDHA R
+### Reg No: 212224230215
+<img width="1203" height="827" alt="b2" src="https://github.com/user-attachments/assets/91762be4-1246-40d0-bedc-26c87f53b302" />
 
 ### Entities and Attributes
-
 | Entity | Attributes (PK, FK) | Notes |
 |--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+|TRAINER |trainer_id (PK), name, specialization |The primary key ensures each trainer is unique|
+|MEMBER  |member_id (PK), name, contact_number, start_date, membership_type |Added contact and date from the diagram|
+|PROGRAM |program_id (PK), program_name, fees |Includes "Yoga, Zumba, etc." as instances of program_name|
+|SESSION |session_id (PK), scheduled_time, trainer_id (FK)|trainer_id is a FK here because a Trainer "Leads" the session|
+|PAYMENT |payment_id (PK), amount, payment_method, member_id (FK) |member_id links the payment to the person paying|
 
 ### Relationships and Constraints
 
 | Relationship | Cardinality | Participation | Notes |
 |--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| Members ↔ Trainers | Many-to-Many (M:M)|Partial |Labeled as "Personal Training" in the diagram |
+|Members ↔ Program  |Many-to-Many (M:M) |Partial|Labeled as "Joins" |
+|Trainers ↔ Program|Many-to-Many (M:M) | Partial  |Labeled as "Trains"   |
+|Trainers ↔ Session|One-to-Many (1:M)|Total (Session)|One trainer can lead many sessions; each session has one trainer.|
+|Member ↔ Payment|One-to-Many (1:M)|Total (Payment)|A member can make many payments (e.g., monthly)|
+
+
 
 ### Assumptions
-- 
-- 
-- 
 
----
+Each member and trainer has a unique ID.
+
+A member can enroll in more than one fitness program.
+
+A trainer can handle multiple sessions and programs.
+
+Each session is conducted by one trainer and records attendance.
+
+Each session generates one payment with a fixed amount.
 
 # Scenario B: City Library Event & Book Lending System
 
@@ -64,33 +73,39 @@ The Central Library wants to manage book lending and cultural events.
 - Overdue fines apply for late returns.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_library.png)
+### Name: RAGASUDHA R
+### Reg No: 212224230215
+<img width="1326" height="773" alt="BOOK1" src="https://github.com/user-attachments/assets/67515a30-9ff1-47aa-9357-1a582787838c" />
 
 ### Entities and Attributes
 
 | Entity | Attributes (PK, FK) | Notes |
 |--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+|Members| Member ID (PK), Name, Phone, Email |Unique identifier for each library member |
+|Book  | Book ID (PK), Title, Author, Category |Unique identifier for each book in the collection   |
+|Events | Event ID (PK), Event Name, Event Date, Room ID (FK)|Room ID is listed as an attribute, making it a Foreign Key from the Room entity.  |
+|Speaker |Speaker ID (PK), Speaker Name, Contact Information  |Unique identifier for guest speakers. |
+|Room  |Room ID (PK), Room Name, Capacity   |Unique identifier for the venue/location       |
 
 ### Relationships and Constraints
 
+
 | Relationship | Cardinality | Participation | Notes |
 |--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+|  Borrow  |  Many-to-Many (M:N) | Partial   |Members can borrow multiple books; includes attributes: Fine Amount, Return Date, and Due Date. |
+|Register |Many-to-Many (M:N)   |Partial   |Many members can register for many events  |
+|Booked     | One-to-Many (1:N)  | Total    | A room can be booked for multiple events, but each event is linked to one specific room.      |
 
 ### Assumptions
-- 
-- 
-- 
+Each member, book, event, loan, speaker, and room has a unique ID.
 
----
+A member can borrow multiple books, but a book is borrowed by one member at a time.
+
+A loan record is created for each book borrowed, with loan and return dates.
+
+A member can register for multiple events, and each event can have many members.
+
+Each event is conducted in one room and can have multiple speakers.
 
 # Scenario C: Restaurant Table Reservation & Ordering
 
@@ -106,33 +121,42 @@ A popular restaurant wants to manage reservations, orders, and billing.
 - Waiters assigned to serve reservations.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
+### Name: RAGASUDHA R
+### Reg No: 212224230215
+![b3](https://github.com/user-attachments/assets/260de28b-42f0-4875-b876-b8eb7fdc131c)
 
 ### Entities and Attributes
 
+
 | Entity | Attributes (PK, FK) | Notes |
 |--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+|Customer | CustomerID (PK), Name, ContactInfo   |Represents the patrons of the restaurant.|
+| Reservation | ReservationID (PK), Date, Time, NumberOfGuests, CustomerID (FK), TableID (FK) | Linked to a specific customer and an assigned table.      |
+| Table |TableID (PK), Capacity, Status |Represents physical tables; status tracks availability|
+|Order |OrderID (PK), CustomerID (FK)    | An order is placed by a customer; contains specific dish IDs   |
+| Bill | BillID (PK), Amount, Service Charge, OrderID (FK)  | Generated based on the order details  |
+|Dish|DishID (PK), Name, Price|The menu items available for order|
+|Waiter|WaiterID (PK), Name|Staff members who provide service.|
 
 ### Relationships and Constraints
-
 | Relationship | Cardinality | Participation | Notes |
 |--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| Makes  | 1:M (One-to-Many)  | Total (Reservation)  |One customer can make multiple reservations.  |
+| Assigned to    | M:1 (Many-to-One)   | Total (Reservation)     |Multiple reservations can be assigned to one table (at different times).  |
+|Generates    | 1:1 (One-to-One)     |  Total   |One order generates exactly one bill |
+|Serves|M:M (Many-to-Many)|Partial|Waiters provide service to multiple service instances.|
+|Orderitem|M:M (Many-to-Many)|Total|Connects orders to specific dishes and their quantities.|
 
 ### Assumptions
-- 
-- 
-- 
+Each customer, order, reservation, table, waiter, and bill has a unique ID.
 
----
+A customer can place multiple orders, but each order belongs to one customer.
+
+A customer can make multiple reservations, and each reservation is for one table.
+
+Each reservation is served by one waiter.
+
+Each reservation generates one bill with a total amount.
 
 ## Instructions for Students
 
