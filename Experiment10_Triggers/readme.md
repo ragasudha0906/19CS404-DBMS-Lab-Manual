@@ -139,6 +139,7 @@ SELECT * FROM products;
 ```
 **Expected Output:**
 - The `last_modified` column in the `products` table is updated automatically to the current date and time when any record is updated.
+<img width="1407" height="725" alt="B3" src="https://github.com/user-attachments/assets/c9c2c187-43fd-4960-910d-8fb0943e4e14" />
 
 
 ## 4. Write a trigger to keep track of the number of updates made to a table.
