@@ -196,9 +196,37 @@ SELECT * FROM audit_log;
 **Steps:**
 - Write a **BEFORE INSERT** trigger on the `employees` table to check if the inserted salary meets a specific condition (e.g., salary must be greater than 3000).
 - If the condition is not met, raise an error to prevent the insert.
-
+### PROGRAM
+```
+CREATE TABLE employees (
+    emp_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(50),
+    salary NUMBER
+);
+```
+```
+CREATE OR REPLACE TRIGGER trg_check_salary
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary <= 3000 THEN
+        RAISE_APPLICATION_ERROR(
+            -20002,
+            'Salary must be greater than 3000!'
+        );
+    END IF;
+END;
+/
+```
+```
+INSERT INTO employees VALUES (1, 'Arun', 5000);
+```
+```
+INSERT INTO employees VALUES (2, 'Bala', 2000);
+```
 **Expected Output:**
 - If the inserted salary in the `employees` table is below the condition (e.g., salary < 3000), the insert operation is blocked, and an error message is raised, such as: `ERROR: Salary below minimum threshold.`
+<img width="1411" height="757" alt="Screenshot 2026-03-23 115700" src="https://github.com/user-attachments/assets/142b339b-dbd4-4b50-8f12-e5b25d83c285" />
 
 ## RESULT
 Thus, the PL/SQL trigger programs were written and executed successfully.
